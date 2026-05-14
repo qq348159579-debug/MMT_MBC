@@ -958,7 +958,7 @@ WHERE id=@id
 });
 
 // Serve built single-file app (optional)
-const distDir = path.join(__dirname, "..", "dist");
+const distDir = path.join(__dirname, "dist");
 app.use("/", express.static(distDir));
 app.get("/", (req, res) => {
   const file = path.join(distDir, "MBC工时与物料管理工具.html");

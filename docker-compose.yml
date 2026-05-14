@@ -1,0 +1,10 @@
+services:
+  mmt-mbc:
+    build:
+      context: .
+    container_name: mmt-mbc
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-3000}:3000"
