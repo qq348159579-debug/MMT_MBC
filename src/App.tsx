@@ -7337,7 +7337,8 @@ export function ProcurementView({ defaultTab = 'requirements' }: { defaultTab?: 
         opts.unshift({
           id: 'bom-default',
           type,
-          name: language === 'zh' ? `默认BOM · ${getBomTypeLabel(type)}` : `Default BOM · ${type}`
+          name: language === 'zh' ? `默认BOM · ${getBomTypeLabel(type)}` : `Default BOM · ${type}`,
+          sourceLabel: undefined,
         });
       }
     });
@@ -7613,7 +7614,7 @@ function TrackingTable({
   onCreateBom: () => void,
   canCreateBom: boolean
 }) {
-  const { state, setState, language, handleSaveToDatabase } = useContext(AppContext)!;
+  const { state, setState, language, handleSaveToDatabase, connectionType, apiBase } = useContext(AppContext)!;
   const t = translations[language];
   const hotRef = useRef<any>(null);
 
@@ -7843,9 +7844,9 @@ function TrackingTable({
         userName: '',
         useDate: '',
         qualityFeedback: '',
-        sourceTemplateVersion: `${currentTemplate.version}${currentTemplate.name ? ` · ${currentTemplate.name}` : ''}`.trim(),
+        sourceTemplateVersion: `${tpl.version}${tpl.name ? ` · ${tpl.name}` : ''}`.trim(),
         changeReason: '由设备BOM生成',
-        changeReasonNote: `From DeviceBOM ${currentTemplate.deviceModelId} ${currentTemplate.bomType} ${currentTemplate.version} ×${deviceCount}`,
+        changeReasonNote: `From DeviceBOM ${tpl.deviceModelId} ${tpl.bomType} ${tpl.version} ×${cnt}`,
         urgency: 'Medium',
         status: 'Pending Review',
         comments: tag,
@@ -11694,7 +11695,7 @@ export function ProjectDashboard() {
 function DeviceBomCenterView() {
   const context = useContext(AppContext);
   if (!context) return null;
-  const { state, setState, language, handleSaveToDatabase, addLog, setView } = context as any;
+  const { state, setState, language, handleSaveToDatabase, addLog, setView, connectionType, apiBase } = context as any;
   const t = translations[language];
 
   const [selectedDeviceId, setSelectedDeviceId] = useState<string>(state.deviceModels?.[0]?.id || '');
@@ -13603,7 +13604,7 @@ export function SetupView() {
                 <button onClick={updateProject} className="btn-primary flex-1">
                   保存修改
                 </button>
-                <button onClick={() => { setEditingProjectId(null); setNewProj({ name: '', managerId: '', budgets: {}, budgetComments: {}, comment: '', status: 'active' }); }} className="bg-slate-100 text-slate-600 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-200 transition-all">
+                <button onClick={() => { setEditingProjectId(null); setNewProj({ name: '', csOrder: '', managerId: '', budgets: {}, budgetComments: {}, comment: '', status: 'active' }); }} className="bg-slate-100 text-slate-600 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-200 transition-all">
                   取消
                 </button>
               </div>
