@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --color-slate-900: #1a1c1e;
+  --color-slate-800: #2c2e30;
+  --color-slate-700: #3f4144;
+  --color-slate-600: #525457;
+  --color-slate-500: #717376;
+  --color-slate-400: #919396;
+  --color-slate-300: #b1b3b6;
+  --color-slate-200: #e1e3e6;
+  --color-slate-100: #f1f3f6;
+  --color-slate-50: #f8f9fb;
+}
+
+/* Hide number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-700 bg-slate-50 antialiased;
+    line-height: 1.55;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-900 tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-xl font-bold shadow-sm ring-1 ring-blue-600/10 transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15 active:scale-[0.99] flex items-center justify-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-slate-900 border border-slate-200 px-4 py-2 rounded-xl font-bold shadow-sm transition-colors hover:bg-slate-50 hover:border-slate-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-900/10 active:scale-[0.99] flex items-center justify-center gap-2;
+  }
+  
+  .btn-ghost {
+    @apply text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-3 py-2 rounded-xl transition-colors flex items-center justify-center gap-2;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl border border-slate-200 shadow-sm p-5;
+  }
+  
+  .input-field {
+    @apply bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium text-slate-900 shadow-sm outline-none transition-colors focus:bg-white focus:ring-4 focus:ring-blue-500/12 focus:border-blue-300 placeholder:text-slate-400;
+  }
+
+  .dashboard-card {
+    @apply bg-white rounded-[2rem] border border-slate-200 shadow-sm;
+  }
+
+  .dashboard-kicker {
+    @apply text-[11px] font-bold text-slate-500;
+  }
+
+  .dashboard-title {
+    @apply text-xl font-black text-slate-900;
+  }
+
+  .dashboard-subtitle {
+    @apply text-sm font-medium text-slate-500;
+  }
+
+  .dashboard-chip {
+    @apply rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 text-[11px] font-bold text-slate-600;
+  }
+
+  .dashboard-subcard {
+    @apply rounded-[1.75rem] border border-slate-200 bg-slate-50/70 p-4;
+  }
+
+  .dashboard-table-head {
+    @apply bg-slate-50 border-b border-slate-200;
+  }
+
+  .dashboard-table-head-cell {
+    @apply px-4 py-3 text-[11px] font-bold text-slate-500;
+  }
+
+  .dashboard-table-cell {
+    @apply px-4 py-3;
+  }
+
+  .dashboard-table-foot {
+    @apply bg-slate-50/80 font-black text-slate-900;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+  }
+}
+
+/* Custom Handsontable Styles */
+.custom-hot {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  background-color: white !important;
+}
+
+/* Handsontable 横向滚动条（用于看到“可以横向滚动/冻结有效”） */
+.custom-hot .wtHolder::-webkit-scrollbar {
+  height: 10px;
+}
+.custom-hot .wtHolder::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-hot .wtHolder::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.7);
+  border-radius: 999px;
+}
+.custom-hot .wtHolder::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.85);
+}
+
+.custom-hot th {
+  background-color: #f8fafc !important;
+  color: #070606f3 !important; /* Darker header text */
+  font-weight: 900 !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  font-size: 10px !important;
+  border-color: #f1f5f9 !important;
+  padding: 6px 8px !important;
+  white-space: normal !important;
+  line-height: 1.1 !important;
+}
+
+/* 周末列：淡灰色背景（含冻结区/非冻结区） */
+.custom-hot th.weekend-header {
+  background-color: #F1F5F9 !important;
+}
+
+.custom-hot td {
+  border-color: #f1f5f9 !important;
+  padding: 6px 8px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important; /* Very dark text for high visibility */
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.custom-hot td.weekend-cell {
+  background-color: #F1F5F9 !important;
+  color: #94A3B8 !important;
+}
+
+/* 工时填报：按“工投% = 实际工时投入 / 应出勤工时数”自动上色 */
+.custom-hot td.hours-low {
+  background-color: #FEE2E2 !important; /* red-100 */
+  color: #991B1B !important; /* red-800 */
+  font-weight: 900 !important;
+}
+.custom-hot td.hours-midlow {
+  background-color: #FFEDD5 !important; /* orange-100 */
+  color: #9A3412 !important; /* orange-800 */
+  font-weight: 900 !important;
+}
+.custom-hot td.hours-mid {
+  background-color: #FEF9C3 !important; /* yellow-100 */
+  color: #854D0E !important; /* yellow-800 */
+  font-weight: 900 !important;
+}
+.custom-hot td.hours-high {
+  background-color: #DCFCE7 !important; /* green-100 */
+  color: #166534 !important; /* green-800 */
+  font-weight: 900 !important;
+}
+.custom-hot td.hours-max {
+  background-color: #BBF7D0 !important; /* green-200 */
+  color: #14532D !important; /* green-900 */
+  font-weight: 900 !important;
+}
+
+/* --- Legacy (Tailwind) embed normalization ---
+   旧功能迁移阶段：为了避免“突兀/过度圆角/字号不一致”，在新UI中对旧页面做轻量收敛。
+   注意：这些规则仅在 .legacy-embed 容器内生效。 */
+.legacy-embed {
+  color: rgba(0, 0, 0, 0.88);
+}
+.legacy-embed .rounded-\[40px\],
+.legacy-embed .rounded-\[32px\],
+.legacy-embed .rounded-3xl,
+.legacy-embed .rounded-2xl,
+.legacy-embed .rounded-xl {
+  border-radius: 10px !important;
+}
+.legacy-embed .shadow-2xl,
+.legacy-embed .shadow-xl,
+.legacy-embed .shadow-lg,
+.legacy-embed .shadow-md {
+  box-shadow: none !important;
+}
+/* 收敛过大的内边距（常见于旧UI的卡片/弹窗） */
+.legacy-embed .p-10,
+.legacy-embed .p-8 {
+  padding: 16px !important;
+}
+.legacy-embed .px-12 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+.legacy-embed .py-10 {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+/* 避免旧UI大量 10px 小字导致可读性下降 */
+.legacy-embed .text-\[10px\] {
+  font-size: 12px !important;
+}
+/* 旧UI的标题在新UI中显得突兀：统一收敛到中后台标题尺度 */
+.legacy-embed .text-3xl,
+.legacy-embed .text-2xl {
+  font-size: 16px !important;
+  line-height: 24px !important;
+}
+.legacy-embed .text-xl {
+  font-size: 15px !important;
+  line-height: 22px !important;
+}
+.legacy-embed .text-lg {
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.legacy-embed .font-black {
+  font-weight: 700 !important;
+}
+.legacy-embed .uppercase {
+  text-transform: none !important;
+}
+.legacy-embed .tracking-widest,
+.legacy-embed .tracking-\[0\.2em\],
+.legacy-embed .tracking-\[0\.18em\],
+.legacy-embed .tracking-\[0\.16em\] {
+  letter-spacing: 0.02em !important;
+}
+.legacy-embed svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Ant Design buttons: unify weight & radius visually */
+.ant-btn {
+  font-weight: 600;
+  border-radius: 8px;
+}
+.ant-btn:not(.ant-btn-lg):not(.ant-btn-sm) {
+  height: 32px;
+}
+.ant-btn-lg {
+  height: 36px;
+}
+.ant-btn-sm {
+  height: 28px;
+}
+
+/* Legacy embedded buttons: normalize shape/typography so it doesn't "jump" */
+.legacy-embed button {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  line-height: 30px !important;
+  border: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+  color: #111827 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+.legacy-embed .btn-primary,
+.legacy-embed .btn-secondary,
+.legacy-embed .btn-ghost,
+.legacy-embed label.btn-primary,
+.legacy-embed label.btn-secondary,
+.legacy-embed a.btn-primary,
+.legacy-embed a.btn-secondary,
+.legacy-embed a.btn-ghost {
+  border-radius: 8px !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+.legacy-embed .btn-primary,
+.legacy-embed label.btn-primary,
+.legacy-embed a.btn-primary {
+  background: #1b4fd8 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+.legacy-embed .btn-secondary,
+.legacy-embed label.btn-secondary,
+.legacy-embed a.btn-secondary {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111827 !important;
+}
+.legacy-embed .btn-ghost,
+.legacy-embed a.btn-ghost {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #374151 !important;
+}
+.legacy-embed button.w-full {
+  height: 36px !important;
+}
+/* icon-only buttons */
+.legacy-embed button.p-1,
+.legacy-embed button.p-2,
+.legacy-embed button.p-3 {
+  width: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+}
+
+/* Map legacy colored buttons into a consistent semantic palette */
+.legacy-embed button.bg-blue-600,
+.legacy-embed button.bg-blue-700,
+.legacy-embed button.bg-indigo-600,
+.legacy-embed button.bg-indigo-700,
+.legacy-embed button.bg-purple-600,
+.legacy-embed button.bg-purple-700,
+.legacy-embed button.bg-slate-900,
+.legacy-embed button.bg-slate-800 {
+  background: #1b4fd8 !important; /* primary */
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+/* 处理类似 bg-indigo-600/90 这类带透明度的 Tailwind 类名（用“包含”选择器兜底） */
+.legacy-embed button[class*="bg-indigo"],
+.legacy-embed button[class*="bg-purple"] {
+  background: #1b4fd8 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+.legacy-embed button[class*="bg-violet"],
+.legacy-embed button[class*="bg-fuchsia"] {
+  background: #1b4fd8 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+.legacy-embed [class*="bg-violet"],
+.legacy-embed [class*="bg-fuchsia"] {
+  background-color: #f8fafc !important;
+}
+.legacy-embed button[class*="bg-slate-9"],
+.legacy-embed button[class*="bg-slate-8"],
+.legacy-embed button[class*="bg-black"] {
+  background: #1b4fd8 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+.legacy-embed button.bg-amber-500,
+.legacy-embed button.bg-amber-600,
+.legacy-embed button.bg-orange-500,
+.legacy-embed button.bg-orange-600 {
+  background: #f59e0b !important; /* warning */
+  border-color: transparent !important;
+  color: #111827 !important;
+}
+.legacy-embed button.bg-rose-600,
+.legacy-embed button.bg-rose-500,
+.legacy-embed button.bg-red-600,
+.legacy-embed button.bg-red-500 {
+  background: #ef4444 !important; /* danger */
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+
+/* Normalize "chip/tab" style buttons in legacy toolbars */
+.legacy-embed button.rounded-full,
+.legacy-embed button.rounded-2xl,
+.legacy-embed button.rounded-xl {
+  border-radius: 8px !important;
+}
+.legacy-embed .rounded-full.border {
+  border-radius: 8px !important;
+}
+
+/* Legacy: unify background surfaces (避免各种蓝底/紫底/灰底混用) */
+.legacy-embed .bg-blue-50,
+.legacy-embed .bg-indigo-50,
+.legacy-embed .bg-purple-50,
+.legacy-embed .bg-slate-50,
+.legacy-embed .bg-slate-100,
+.legacy-embed .bg-gray-50,
+.legacy-embed .bg-gray-100 {
+  background-color: #f8fafc !important;
+}
+.legacy-embed .bg-emerald-50,
+.legacy-embed .bg-green-50,
+.legacy-embed .bg-amber-50,
+.legacy-embed .bg-orange-50,
+.legacy-embed .bg-rose-50,
+.legacy-embed .bg-red-50 {
+  background-color: #f8fafc !important;
+}
+.legacy-embed .bg-blue-600\/10,
+.legacy-embed .bg-blue-500\/10,
+.legacy-embed .bg-amber-500\/10,
+.legacy-embed .bg-rose-500\/10 {
+  background-color: #f8fafc !important;
+}
+
+/* Legacy root background: let ProLayout's background show through */
+.legacy-embed .min-h-screen {
+  min-height: auto !important;
+  background: transparent !important;
+}
+
+.custom-hot .htNumeric {
+  color: #2563eb !important;
+  text-align: center !important;
+}
+
+.custom-hot .htAutocompleteArrow {
+  color: #2255e0 !important;
+}
+
+/* Ensure dropdown text is dark */
+.handsontable .htAutocomplete {
+  color: #1e293b !important;
+}
+
+.custom-hot td.unsaved-cell {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  font-style: italic !important;
+  font-weight: bold !important;
+}
+
+.custom-hot td.unsaved-cell .htAutocompleteArrow {
+  color: #FFFFFF !important;
+}
+
+.wtHolder {
+  width: 100% !important;
+}
