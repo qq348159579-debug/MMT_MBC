@@ -134,3 +134,33 @@ Usage notes:
 <!-- SKILLS_TABLE_END -->
 
 </skills_system>
+
+## Cursor Cloud specific instructions
+
+### Project overview
+
+MBC Working Hour & Material Management Tool — a React SPA (single-page app) for tracking employee timesheets and procurement materials. Built with React 19, Ant Design, Tailwind CSS 4, and Vite. Compiles to a single self-contained HTML file via `vite-plugin-singlefile`.
+
+### Running the app
+
+- **Dev server:** `npm run dev` — Vite dev server on `http://0.0.0.0:3000`
+- **Build:** `npm run build` — outputs to `dist/MBC工时与物料管理工具.html`
+- **Lint:** `npm run lint` (runs `tsc --noEmit`)
+- **Preview production build:** `npm run preview`
+
+### Login credentials
+
+All employees use password `1`. The Admin account (`admin-1` / `管理员`) has full access. User data is seeded from `database.json` and stored client-side via IndexedDB (`idb-keyval`).
+
+### Environment variables
+
+Copy `.env.example` to `.env.local`. The `GEMINI_API_KEY` is only needed for AI-powered features (optional for core functionality).
+
+### Architecture notes
+
+- Source code lives in `src/` — `main.tsx` (entry), `App.tsx` (all components in one file), `styles.css`
+- Type definitions: `types.ts` (root)
+- Translations: `translations.ts` (root, EN/ZH)
+- Seed data: `database.json` (root)
+- Path alias: `@/*` resolves to project root
+- The app uses client-side storage only (IndexedDB) — no backend server needed for core features
